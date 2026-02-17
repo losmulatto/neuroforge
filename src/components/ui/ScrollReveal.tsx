@@ -20,7 +20,7 @@ export default function ScrollReveal({
   direction = "up",
   distance = 60,
   duration = 0.8,
-  once = true,
+  once = false,
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once, margin: "-60px" });
