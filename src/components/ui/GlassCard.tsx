@@ -35,8 +35,8 @@ export default function GlassCard({
   // Derived cursor glow — must be computed unconditionally (Rules of Hooks)
   const cursorGlowBg = useTransform(
     [glowX, glowY],
-    ([gx, gy]: [string, string]) =>
-      `radial-gradient(circle at ${gx} ${gy}, ${glowColor.replace("0.1", "0.18")} 0%, transparent 60%)`
+    (v: string[]) =>
+      `radial-gradient(circle at ${v[0]} ${v[1]}, ${glowColor.replace("0.1", "0.18")} 0%, transparent 60%)`
   );
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
