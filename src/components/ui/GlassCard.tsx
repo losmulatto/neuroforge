@@ -32,6 +32,13 @@ export default function GlassCard({
   const glowX = useTransform(mouseXSpring, [-0.5, 0.5], ["0%", "100%"]);
   const glowY = useTransform(mouseYSpring, [-0.5, 0.5], ["0%", "100%"]);
 
+  // Derived cursor glow — must be computed unconditionally (Rules of Hooks)
+  const cursorGlowBg = useTransform(
+    [glowX, glowY],
+    ([gx, gy]: [string, string]) =>
+      `radial-gradient(circle at ${gx} ${gy}, ${glowColor.replace("0.1", "0.18")} 0%, transparent 60%)`
+  );
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!hover || !ref.current) return;
     const rect = ref.current.getBoundingClientRect();
@@ -73,11 +80,7 @@ export default function GlassCard({
         <motion.div
           className="pointer-events-none absolute inset-0 opacity-0 rounded-3xl transition-opacity duration-300"
           style={{
-            background: useTransform(
-              [glowX, glowY],
-              ([gx, gy]) =>
-                `radial-gradient(circle at ${gx} ${gy}, ${glowColor.replace("0.1", "0.18")} 0%, transparent 60%)`
-            ),
+            background: cursorGlowBg,
           }}
           whileHover={{ opacity: 1 }}
         />
