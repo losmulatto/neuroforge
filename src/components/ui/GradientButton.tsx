@@ -58,7 +58,7 @@ export default function GradientButton({
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.98 }}
     >
-      {children}
+      <span className="relative z-10">{children}</span>
     </Component>
   );
 }
